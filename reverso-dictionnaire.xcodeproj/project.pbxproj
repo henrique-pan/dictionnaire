@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		9BD40BAA1FAB6CD4003ED7B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40BA91FAB6CD4003ED7B0 /* AppDelegate.swift */; };
-		9BD40BAC1FAB6CD4003ED7B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40BAB1FAB6CD4003ED7B0 /* ViewController.swift */; };
 		9BD40BAF1FAB6CD4003ED7B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD40BAD1FAB6CD4003ED7B0 /* Main.storyboard */; };
 		9BD40BB11FAB6CD4003ED7B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BD40BB01FAB6CD4003ED7B0 /* Assets.xcassets */; };
 		9BD40BB41FAB6CD4003ED7B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD40BB21FAB6CD4003ED7B0 /* LaunchScreen.storyboard */; };
+		9BD40BBC1FAB6E7F003ED7B0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40BBB1FAB6E7F003ED7B0 /* TableViewController.swift */; };
+		9BD40BBF1FAB738A003ED7B0 /* EditWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD40BBE1FAB738A003ED7B0 /* EditWordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9BD40BA61FAB6CD4003ED7B0 /* reverso-dictionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "reverso-dictionnaire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD40BA91FAB6CD4003ED7B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9BD40BAB1FAB6CD4003ED7B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9BD40BAE1FAB6CD4003ED7B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BD40BB01FAB6CD4003ED7B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BD40BB31FAB6CD4003ED7B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BD40BB51FAB6CD4003ED7B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BD40BBB1FAB6E7F003ED7B0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9BD40BBE1FAB738A003ED7B0 /* EditWordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		9BD40BA81FAB6CD4003ED7B0 /* reverso-dictionnaire */ = {
 			isa = PBXGroup;
 			children = (
+				9BD40BBD1FAB6FD9003ED7B0 /* images */,
 				9BD40BA91FAB6CD4003ED7B0 /* AppDelegate.swift */,
-				9BD40BAB1FAB6CD4003ED7B0 /* ViewController.swift */,
+				9BD40BBB1FAB6E7F003ED7B0 /* TableViewController.swift */,
+				9BD40BBE1FAB738A003ED7B0 /* EditWordViewController.swift */,
 				9BD40BAD1FAB6CD4003ED7B0 /* Main.storyboard */,
 				9BD40BB01FAB6CD4003ED7B0 /* Assets.xcassets */,
 				9BD40BB21FAB6CD4003ED7B0 /* LaunchScreen.storyboard */,
 				9BD40BB51FAB6CD4003ED7B0 /* Info.plist */,
 			);
 			path = "reverso-dictionnaire";
+			sourceTree = "<group>";
+		};
+		9BD40BBD1FAB6FD9003ED7B0 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +147,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD40BAC1FAB6CD4003ED7B0 /* ViewController.swift in Sources */,
+				9BD40BBC1FAB6E7F003ED7B0 /* TableViewController.swift in Sources */,
+				9BD40BBF1FAB738A003ED7B0 /* EditWordViewController.swift in Sources */,
 				9BD40BAA1FAB6CD4003ED7B0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TableViewController.swift
 //  reverso-dictionnaire
 //
 //  Created by eleves on 2017-11-02.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class TableViewController: UITableViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavBar()
-    
+        setupNavBar()        
     }
-
+    
     func setupNavBar() {
         //navigationController?.navigationBar.prefersLargeTitles = true
     }
-
+    
+    
 }
 

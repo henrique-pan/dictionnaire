@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EditWordViewController.swift
 //  reverso-dictionnaire
 //
 //  Created by eleves on 2017-11-02.
@@ -8,18 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class EditWordViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavBar()
+        
+    }
+  
+    @IBAction func unwindViewController(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
-    }
-
-    func setupNavBar() {
-        //navigationController?.navigationBar.prefersLargeTitles = true
-    }
-
 }
-
