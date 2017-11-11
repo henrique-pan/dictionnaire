@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		9BC8639E1FB34A3500BF2E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */; };
-		9BC863A01FB34A3500BF2E72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8639F1FB34A3500BF2E72 /* ViewController.swift */; };
 		9BC863A31FB34A3500BF2E72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC863A11FB34A3500BF2E72 /* Main.storyboard */; };
 		9BC863A51FB34A3500BF2E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC863A41FB34A3500BF2E72 /* Assets.xcassets */; };
 		9BC863A81FB34A3500BF2E72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC863A61FB34A3500BF2E72 /* LaunchScreen.storyboard */; };
+		9BC863B01FB34C1E00BF2E72 /* EditWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC863AF1FB34C1E00BF2E72 /* EditWordViewController.swift */; };
+		9BC863B21FB34C8900BF2E72 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC863B11FB34C8900BF2E72 /* MainTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9BC8639A1FB34A3500BF2E72 /* reverso-dictionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "reverso-dictionnaire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9BC8639F1FB34A3500BF2E72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9BC863A21FB34A3500BF2E72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9BC863A41FB34A3500BF2E72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BC863A71FB34A3500BF2E72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BC863A91FB34A3500BF2E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BC863AF1FB34C1E00BF2E72 /* EditWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWordViewController.swift; sourceTree = "<group>"; };
+		9BC863B11FB34C8900BF2E72 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */,
-				9BC8639F1FB34A3500BF2E72 /* ViewController.swift */,
+				9BC863B11FB34C8900BF2E72 /* MainTableViewController.swift */,
+				9BC863AF1FB34C1E00BF2E72 /* EditWordViewController.swift */,
 				9BC863A11FB34A3500BF2E72 /* Main.storyboard */,
 				9BC863A41FB34A3500BF2E72 /* Assets.xcassets */,
 				9BC863A61FB34A3500BF2E72 /* LaunchScreen.storyboard */,
@@ -136,7 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BC863A01FB34A3500BF2E72 /* ViewController.swift in Sources */,
+				9BC863B21FB34C8900BF2E72 /* MainTableViewController.swift in Sources */,
+				9BC863B01FB34C1E00BF2E72 /* EditWordViewController.swift in Sources */,
 				9BC8639E1FB34A3500BF2E72 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSS529BVHK;
 				INFOPLIST_FILE = "reverso-dictionnaire/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Henrique.reverso-dictionnaire";
@@ -289,6 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSS529BVHK;
 				INFOPLIST_FILE = "reverso-dictionnaire/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Henrique.reverso-dictionnaire";
