@@ -68,21 +68,18 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wordsCell" id="9DB-s9-txS">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="wordsCell" id="9DB-s9-txS">
                                 <rect key="frame" x="0.0" y="201" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9DB-s9-txS" id="AVP-CD-eKu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="77B-mZ-JYR" kind="show" identifier="editSegue" id="UYZ-XB-HHg"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="bDG-Fs-RZS" id="Myk-hl-lJW"/>
-                            <outlet property="delegate" destination="bDG-Fs-RZS" id="TBw-YX-Cf2"/>
+                            <outlet property="dataSource" destination="bDG-Fs-RZS" id="NZj-8f-MCf"/>
+                            <outlet property="delegate" destination="bDG-Fs-RZS" id="DOj-1A-UM7"/>
                         </connections>
                     </tableView>
                     <toolbarItems>
@@ -96,12 +93,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="buttonExpansion" destination="6Jv-fN-hb4" id="DgG-Uu-UtO"/>
                         <outlet property="imageArrow" destination="WGt-W5-z3W" id="SNk-B5-1Rp"/>
                         <outlet property="labelLanguage" destination="QeQ-2e-e4x" id="cIO-42-naz"/>
                         <outlet property="laguageView" destination="iJ7-6E-23V" id="r58-Sc-Zdo"/>
                         <outlet property="pickerLanguage" destination="YWv-Wd-lgH" id="Cel-au-lfH"/>
+                        <segue destination="77B-mZ-JYR" kind="show" identifier="editSegue" id="IxQ-IT-iLG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7k-Mi-Tio" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -111,7 +110,7 @@
         <!--Edit Word-->
         <scene sceneID="wL4-q8-677">
             <objects>
-                <tableViewController id="77B-mZ-JYR" customClass="EditWordViewController" customModule="reverso_dictionnaire" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditTableViewController" id="77B-mZ-JYR" customClass="EditWordViewController" customModule="reverso_dictionnaire" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" id="JSI-bi-MUu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,6 +296,6 @@
         <image name="arrow-right" width="7" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UYZ-XB-HHg"/>
+        <segue reference="IxQ-IT-iLG"/>
     </inferredMetricsTieBreakers>
 </document>

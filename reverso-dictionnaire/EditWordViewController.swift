@@ -38,10 +38,14 @@ class EditWordViewController: UITableViewController {
     
     var isNewWord = false
     
+    var editingWord: String?
+    var editingTranslation: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         
         languageCell.frame.origin.y = 0
@@ -51,14 +55,23 @@ class EditWordViewController: UITableViewController {
         
         //Set title
         if isNewWord {
-           self.title = "Add Word"
+            self.title = "Add Word"
         } else {
-           self.title = "Edit Word"
+            self.title = "Edit Word"
+            tableView.allowsSelection = false
+            imageArrow.isHidden = true
+            textFieldWord.isEnabled = false
+            textFieldWord.text = editingWord
+            textFieldTranslation.text = editingTranslation
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        textFieldWord.becomeFirstResponder()
+        if isNewWord {
+            textFieldWord.becomeFirstResponder()
+        } else {
+            textFieldTranslation.becomeFirstResponder()
+        }
     }
     
     func setTranslationLanguage() {
@@ -109,11 +122,9 @@ class EditWordViewController: UITableViewController {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-        
         if !textFieldWord.text!.isEmpty && !textFieldTranslation.text!.isEmpty {
-            let word = textFieldWord.text!
-            let translation = textFieldTranslation.text!
+            let word = textFieldWord.text!.lowercased()
+            let translation = textFieldTranslation.text!.lowercased()
             
             let listNumber = findListNumber()
             if var dataStructure = userDefaults.object(forKey:"list\(listNumber)") as? [String: String] {
@@ -140,11 +151,17 @@ class EditWordViewController: UITableViewController {
                     userDefaults.set([translation : word], forKey: "list\(listNumber)")
                 }
             }
+            
+            navigationController?.popViewController(animated: true)
+            dismiss(animated: true, completion: nil)
+            
         } else {
-            // SHOW MESSAGE TO ENTER THE TEXT
+            let alert = UIAlertController(title: "Alert",
+                                        message: "Please, enter the word and the translation correctelly",
+                                        preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     private func findListNumber() -> Int {
@@ -176,6 +193,10 @@ class EditWordViewController: UITableViewController {
             isExpanded = true
             textFieldWord.resignFirstResponder()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
     }
 
 }

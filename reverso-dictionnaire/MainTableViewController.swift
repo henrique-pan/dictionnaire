@@ -34,6 +34,13 @@ class MainTableViewController: UITableViewController {
                              (3, "French -> Portuguese"), (4, "Portuguese -> French"),
                              (5, "English -> Portuguese"), (6, "Portuguese -> English")]
     
+    private var words = [(key:String, value:String)]()
+    
+    //Search bar
+    private var filteredWords = [(key:String, value:String)]()
+    private var isSearching = false
+    //Search bar
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,14 +54,49 @@ class MainTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         //load SelectedTranslation
         setTranslationLanguage()
+        loadWords()
+        tableView.reloadData()
     }
     
+    func loadWords() {
+        let listNumber = findListNumber()
+        if let dataStructure = userDefaults.object(forKey:"list\(listNumber)") as? [String: String] {
+            if selectedTranslation % 2 != 0{
+                words = dataStructure.sorted(by: {t1, t2 in
+                    return t1.key < t2.key
+                })
+            } else {
+                words = dataStructure.sorted(by: {t1, t2 in
+                    return t1.value < t2.value
+                })
+            }
+        } else {
+            words.removeAll()
+        }
+    }
+    
+    private func findListNumber() -> Int {
+        if selectedTranslation <= 2 {
+            return 2
+        } else if selectedTranslation <= 4 {
+            return 4
+        } else {
+            return 6
+        }
+    }
+    
+    var searchController: UISearchController!
+    var searchBar: UISearchBar!
     func setUpNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let searchController = UISearchController(searchResultsController: nil)
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        searchBar = searchController.searchBar
+        searchBar.delegate = self
     }
     
     func setTranslationLanguage() {
@@ -92,6 +134,7 @@ class MainTableViewController: UITableViewController {
             
             imageArrow.image = imageArrowDown
             isExpanded = true
+            self.tableView.reloadData()
         }
     }
     
@@ -102,6 +145,7 @@ class MainTableViewController: UITableViewController {
         let viewHeight = CGFloat(55)
         UIView.animate(withDuration: 0.3, animations: {
             self.laguageView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+            self.tableView.reloadData()
         }, completion: { (finished: Bool) in
             self.pickerLanguage.isHidden = true
         })
@@ -110,18 +154,31 @@ class MainTableViewController: UITableViewController {
     }
     
     
- 
+    var selectedRow: Int?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        colapseExpansion()
-        
+                
         let editViewController = segue.destination as! EditWordViewController
         if segue.identifier == "addSegue" {
             editViewController.isNewWord = true
         } else {
+            navigationController?.dismiss(animated: true, completion: nil)
+            var wordsToShow: [(key:String, value:String)]
+            if isSearching {
+                wordsToShow = filteredWords
+            } else {
+                wordsToShow = words
+            }
             editViewController.isNewWord = false
+            if selectedTranslation % 2 != 0 {
+                editViewController.editingWord = wordsToShow[selectedRow!].key
+                editViewController.editingTranslation = wordsToShow[selectedRow!].value
+            } else {
+                editViewController.editingWord = wordsToShow[selectedRow!].value
+                editViewController.editingTranslation = wordsToShow[selectedRow!].key
+            }
         }
-        
+        colapseExpansion()
     }
     
 }
@@ -171,8 +228,77 @@ extension MainTableViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         selectedTranslation = languages[row].0
         userDefaults.set(selectedTranslation, forKey: "selectedTranslation")
         labelLanguage.text = languages[row].1
+        loadWords()
+        tableView.reloadData()
     }
     
+}
+
+// Extension TableViewController
+extension MainTableViewController {
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if isExpanded {
+            colapseExpansion()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching {
+            return filteredWords.count
+        } else {
+            return words.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wordsCell", for: indexPath)
+        
+        var wordsToShow: [(key:String, value:String)]
+        if isSearching {
+            wordsToShow = filteredWords
+        } else {
+            wordsToShow = words
+        }
+        
+        if selectedTranslation % 2 != 0{
+            let word = "\(wordsToShow[indexPath.item].key) = \(wordsToShow[indexPath.item].value)"
+            cell.textLabel?.text = word
+        } else {
+            let word = "\(wordsToShow[indexPath.item].value) = \(wordsToShow[indexPath.item].key)"
+            cell.textLabel?.text = word
+        }
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row        
+        performSegue(withIdentifier: "editSegue", sender: tableView)
+    }
+}
+
+// Extension SearchBar
+extension MainTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            tableView.endEditing(true)
+            tableView.reloadData()
+        } else {
+            isSearching = true
+            filteredWords = words.filter({ t in
+                let typedTextLowercased = searchBar.text!.lowercased()
+                let key = t.key.folding(options: .diacriticInsensitive, locale: .current)
+                let value = t.value.folding(options: .diacriticInsensitive, locale: .current)
+                let containsInKey = key.contains(typedTextLowercased)
+                let containsInValue = value.contains(typedTextLowercased)
+                return (containsInKey || containsInValue)
+            })
+            tableView.reloadData()
+        }
+    }
 }
 
 
