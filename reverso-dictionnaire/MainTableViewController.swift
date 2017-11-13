@@ -30,9 +30,9 @@ class MainTableViewController: UITableViewController {
     var imageArrowRight = UIImage(named: "arrow-right")
     var imageArrowDown = UIImage(named: "arrow-down")
     
-    private let languages = [(1, "French -> English"), (2, "English -> French"),
-                             (3, "French -> Portuguese"), (4, "Portuguese -> French"),
-                             (5, "English -> Portuguese"), (6, "Portuguese -> English")]
+    private let languages = [(1, "French => English"), (2, "English => French"),
+                             (3, "French => Portuguese"), (4, "Portuguese => French"),
+                             (5, "English => Portuguese"), (6, "Portuguese => English")]
     
     private var words = [(key:String, value:String)]()
     
@@ -96,6 +96,28 @@ class MainTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchBar = searchController.searchBar
+        
+
+        //searchBar.tintColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
+        //searchBar.backgroundColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
+        
+        searchBar.tintColor = UIColor.white
+        searchBar.barTintColor = UIColor.white
+        
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.textColor = UIColor.blue
+            textfield.tintColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
+            if let backgroundview = textfield.subviews.first {
+                
+                // Background color
+                backgroundview.backgroundColor = UIColor.white
+                
+                // Rounded corner
+                backgroundview.layer.cornerRadius = 10;
+                backgroundview.clipsToBounds = true;
+            }
+        }
+        
         searchBar.delegate = self
     }
     
@@ -207,7 +229,6 @@ extension UIButton {
         self.setBackgroundImage(colorImage, for: forState)
     }
 }
-
 
 // Extension Picker
 extension MainTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
