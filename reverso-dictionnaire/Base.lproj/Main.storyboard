@@ -8,6 +8,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Arial.ttf">
+            <string>ArialMT</string>
+        </array>
+        <array key="ArialBold.ttf">
+            <string>Arial-BoldMT</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Dictionnary-->
         <scene sceneID="cJH-6S-Nri">
@@ -22,20 +30,23 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="WGt-W5-z3W">
-                                    <rect key="frame" x="345" y="23" width="15" height="15"/>
+                                    <rect key="frame" x="345" y="25" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="Q1w-fY-puw"/>
                                         <constraint firstAttribute="width" constant="15" id="l93-Hx-TgN"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeQ-2e-e4x">
-                                    <rect key="frame" x="8" y="20" width="359" height="21"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <rect key="frame" x="8" y="20" width="359" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="iqF-FL-ANV"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="YWv-Wd-lgH">
-                                    <rect key="frame" x="0.0" y="56" width="375" height="117"/>
+                                    <rect key="frame" x="0.0" y="58" width="375" height="115"/>
                                     <connections>
                                         <outlet property="dataSource" destination="bDG-Fs-RZS" id="ajj-kf-W8E"/>
                                         <outlet property="delegate" destination="bDG-Fs-RZS" id="5rZ-OH-wMv"/>
@@ -60,7 +71,7 @@
                                 <constraint firstItem="YWv-Wd-lgH" firstAttribute="leading" secondItem="iJ7-6E-23V" secondAttribute="leading" id="KHn-We-7Th"/>
                                 <constraint firstItem="QeQ-2e-e4x" firstAttribute="top" secondItem="iJ7-6E-23V" secondAttribute="top" constant="20" id="M9v-Sg-VDY"/>
                                 <constraint firstAttribute="trailing" secondItem="6Jv-fN-hb4" secondAttribute="trailing" id="QEk-1F-Ky8"/>
-                                <constraint firstItem="YWv-Wd-lgH" firstAttribute="top" secondItem="QeQ-2e-e4x" secondAttribute="bottom" constant="15" id="UaS-EE-dWe"/>
+                                <constraint firstItem="YWv-Wd-lgH" firstAttribute="top" secondItem="QeQ-2e-e4x" secondAttribute="bottom" constant="13" id="UaS-EE-dWe"/>
                                 <constraint firstItem="WGt-W5-z3W" firstAttribute="centerY" secondItem="QeQ-2e-e4x" secondAttribute="centerY" id="f5w-Hq-ads"/>
                                 <constraint firstAttribute="trailing" secondItem="YWv-Wd-lgH" secondAttribute="trailing" id="o1l-CB-aNC"/>
                                 <constraint firstAttribute="trailing" secondItem="QeQ-2e-e4x" secondAttribute="trailing" constant="8" id="pY8-10-iW0"/>
@@ -68,13 +79,54 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="wordsCell" id="9DB-s9-txS">
-                                <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="wordsCell" rowHeight="50" id="9DB-s9-txS" customClass="TranslationTableViewCell" customModule="reverso_dictionnaire" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="201" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9DB-s9-txS" id="AVP-CD-eKu">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="translaiton-icon" translatesAutoresizingMaskIntoConstraints="NO" id="O1n-Kq-XVD">
+                                            <rect key="frame" x="145" y="-0.5" width="50" height="50.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="NJl-Ux-JTY"/>
+                                                <constraint firstAttribute="height" constant="50" id="tHh-JW-INm"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCa-hj-hgu">
+                                            <rect key="frame" x="16" y="13" width="121" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="lRl-43-VcU"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKZ-Jj-Lao">
+                                            <rect key="frame" x="203" y="12.5" width="146" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="OPL-at-PsN"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="bKZ-Jj-Lao" secondAttribute="trailing" constant="-8" id="FAR-YP-FMU"/>
+                                        <constraint firstItem="O1n-Kq-XVD" firstAttribute="leading" secondItem="sCa-hj-hgu" secondAttribute="trailing" constant="8" id="GvQ-0F-S1X"/>
+                                        <constraint firstItem="O1n-Kq-XVD" firstAttribute="centerX" secondItem="AVP-CD-eKu" secondAttribute="centerX" id="PNf-xD-Nf7"/>
+                                        <constraint firstItem="sCa-hj-hgu" firstAttribute="centerY" secondItem="O1n-Kq-XVD" secondAttribute="centerY" id="UAr-bI-gPK"/>
+                                        <constraint firstItem="bKZ-Jj-Lao" firstAttribute="leading" secondItem="O1n-Kq-XVD" secondAttribute="trailing" constant="8" id="VHg-46-RVi"/>
+                                        <constraint firstItem="bKZ-Jj-Lao" firstAttribute="centerY" secondItem="O1n-Kq-XVD" secondAttribute="centerY" id="YJ5-bJ-RAf"/>
+                                        <constraint firstItem="sCa-hj-hgu" firstAttribute="leading" secondItem="AVP-CD-eKu" secondAttribute="leading" constant="16" id="dPv-Vo-pWY"/>
+                                        <constraint firstItem="O1n-Kq-XVD" firstAttribute="centerY" secondItem="AVP-CD-eKu" secondAttribute="centerY" id="sY9-5h-uk3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="labelTranslation" destination="bKZ-Jj-Lao" id="bE0-vo-zJ7"/>
+                                    <outlet property="labelWord" destination="sCa-hj-hgu" id="QJh-gj-x4Q"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -105,7 +157,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s7k-Mi-Tio" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358.125" y="175.35211267605635"/>
+            <point key="canvasLocation" x="357.60000000000002" y="174.96251874062969"/>
         </scene>
         <!--Edit Word-->
         <scene sceneID="wL4-q8-677">
@@ -128,20 +180,23 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQU-pt-BJx" userLabel="Label Language">
-                                                    <rect key="frame" x="8" y="15" width="359" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <rect key="frame" x="8" y="15" width="359" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="xoU-W0-Dn7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-right" translatesAutoresizingMaskIntoConstraints="NO" id="7ed-M9-OcY">
-                                                    <rect key="frame" x="345" y="18" width="15" height="15"/>
+                                                    <rect key="frame" x="345" y="20.5" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="AWm-o8-cew"/>
                                                         <constraint firstAttribute="width" constant="15" id="W7d-Zb-FKg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iwJ-5m-18p">
-                                                    <rect key="frame" x="0.0" y="51" width="375" height="119"/>
+                                                    <rect key="frame" x="0.0" y="53" width="375" height="117"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="77B-mZ-JYR" id="P5S-1A-BYO"/>
                                                         <outlet property="delegate" destination="77B-mZ-JYR" id="8hQ-8f-8oV"/>
@@ -153,7 +208,7 @@
                                                 <constraint firstItem="iwJ-5m-18p" firstAttribute="leading" secondItem="cJo-sk-KQv" secondAttribute="leading" id="MN3-vR-dqx"/>
                                                 <constraint firstAttribute="trailing" secondItem="WQU-pt-BJx" secondAttribute="trailing" constant="8" id="RqL-WA-thU"/>
                                                 <constraint firstAttribute="trailing" secondItem="7ed-M9-OcY" secondAttribute="trailing" constant="15" id="X9o-HG-sFi"/>
-                                                <constraint firstItem="iwJ-5m-18p" firstAttribute="top" secondItem="WQU-pt-BJx" secondAttribute="bottom" constant="15" id="Yp1-c6-7co"/>
+                                                <constraint firstItem="iwJ-5m-18p" firstAttribute="top" secondItem="WQU-pt-BJx" secondAttribute="bottom" constant="13" id="Yp1-c6-7co"/>
                                                 <constraint firstAttribute="bottom" secondItem="iwJ-5m-18p" secondAttribute="bottom" id="ZZ8-Op-M3A"/>
                                                 <constraint firstAttribute="trailing" secondItem="iwJ-5m-18p" secondAttribute="trailing" id="r9A-7j-apV"/>
                                                 <constraint firstItem="7ed-M9-OcY" firstAttribute="centerY" secondItem="WQU-pt-BJx" secondAttribute="centerY" id="vMb-Vc-4rX"/>
@@ -175,9 +230,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X0l-Al-S0b">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="textFieldTouchDown:" destination="77B-mZ-JYR" eventType="touchDownRepeat" id="84t-ER-WUP"/>
@@ -209,7 +264,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m4h-Jx-VG4">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="20"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="textFieldTouchDown:" destination="77B-mZ-JYR" eventType="touchUpInside" id="PAI-aw-ZdC"/>
@@ -294,6 +349,7 @@
     </scenes>
     <resources>
         <image name="arrow-right" width="7" height="12"/>
+        <image name="translaiton-icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IxQ-IT-iLG"/>

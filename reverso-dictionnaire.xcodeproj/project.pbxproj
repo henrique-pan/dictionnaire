@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B7161841FB9E04D004C86FF /* TranslationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7161831FB9E04D004C86FF /* TranslationTableViewCell.swift */; };
 		9BC8639E1FB34A3500BF2E72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */; };
 		9BC863A31FB34A3500BF2E72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BC863A11FB34A3500BF2E72 /* Main.storyboard */; };
 		9BC863A51FB34A3500BF2E72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC863A41FB34A3500BF2E72 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B7161831FB9E04D004C86FF /* TranslationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationTableViewCell.swift; sourceTree = "<group>"; };
 		9BC8639A1FB34A3500BF2E72 /* reverso-dictionnaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "reverso-dictionnaire.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BC863A21FB34A3500BF2E72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				9BC8639D1FB34A3500BF2E72 /* AppDelegate.swift */,
 				9BC863B11FB34C8900BF2E72 /* MainTableViewController.swift */,
+				9B7161831FB9E04D004C86FF /* TranslationTableViewCell.swift */,
 				9BC863AF1FB34C1E00BF2E72 /* EditWordViewController.swift */,
 				9BC863A11FB34A3500BF2E72 /* Main.storyboard */,
 				9BC863A41FB34A3500BF2E72 /* Assets.xcassets */,
@@ -142,6 +145,7 @@
 				9BC863B21FB34C8900BF2E72 /* MainTableViewController.swift in Sources */,
 				9BC863B01FB34C1E00BF2E72 /* EditWordViewController.swift in Sources */,
 				9BC8639E1FB34A3500BF2E72 /* AppDelegate.swift in Sources */,
+				9B7161841FB9E04D004C86FF /* TranslationTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

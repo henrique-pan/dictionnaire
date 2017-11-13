@@ -252,7 +252,7 @@ extension MainTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "wordsCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wordsCell", for: indexPath) as! TranslationTableViewCell
         
         var wordsToShow: [(key:String, value:String)]
         if isSearching {
@@ -262,11 +262,11 @@ extension MainTableViewController {
         }
         
         if selectedTranslation % 2 != 0{
-            let word = "\(wordsToShow[indexPath.item].key) = \(wordsToShow[indexPath.item].value)"
-            cell.textLabel?.text = word
+            cell.labelWord.text = wordsToShow[indexPath.item].key
+            cell.labelTranslation.text = wordsToShow[indexPath.item].value
         } else {
-            let word = "\(wordsToShow[indexPath.item].value) = \(wordsToShow[indexPath.item].key)"
-            cell.textLabel?.text = word
+            cell.labelWord.text = wordsToShow[indexPath.item].value
+            cell.labelTranslation.text = wordsToShow[indexPath.item].key
         }
         
         return cell
@@ -275,6 +275,28 @@ extension MainTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedRow = indexPath.row        
         performSegue(withIdentifier: "editSegue", sender: tableView)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if isSearching {
+                let removedWord = filteredWords[indexPath.item]
+                filteredWords.remove(at: indexPath.item)
+                let index = words.index(where: {t in
+                    return t.key == removedWord.key && t.value == removedWord.value
+                })
+                words.remove(at: index!)
+            } else {
+                words.remove(at: indexPath.item)
+            }
+            
+            let listNumber = findListNumber()
+            userDefaults.set(words, forKey: "list\(listNumber)")
+            
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+        }
     }
 }
 

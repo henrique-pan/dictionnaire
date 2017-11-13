@@ -22,7 +22,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-icon" translatesAutoresizingMaskIntoConstraints="NO" id="L71-6W-83f">
                                 <rect key="frame" x="112" y="129" width="150" height="150"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-text" translatesAutoresizingMaskIntoConstraints="NO" id="tXX-CU-plI">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-text-english" translatesAutoresizingMaskIntoConstraints="NO" id="tXX-CU-plI">
                                 <rect key="frame" x="46.5" y="547" width="281" height="100"/>
                             </imageView>
                         </subviews>
@@ -45,6 +45,6 @@
     </scenes>
     <resources>
         <image name="logo-icon" width="150" height="150"/>
-        <image name="logo-text" width="789" height="236"/>
+        <image name="logo-text-english" width="512" height="153"/>
     </resources>
 </document>
