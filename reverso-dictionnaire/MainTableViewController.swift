@@ -30,9 +30,9 @@ class MainTableViewController: UITableViewController {
     var imageArrowRight = UIImage(named: "arrow-right")
     var imageArrowDown = UIImage(named: "arrow-down")
     
-    private let languages = [(1, "French => English"), (2, "English => French"),
-                             (3, "French => Portuguese"), (4, "Portuguese => French"),
-                             (5, "English => Portuguese"), (6, "Portuguese => English")]
+    private let languages = [(1, "French  ->  English"), (2, "English  ->  French"),
+                             (3, "French  ->  Portuguese"), (4, "Portuguese  ->  French"),
+                             (5, "English  ->  Portuguese"), (6, "Portuguese  ->  English")]
     
     private var words = [(key:String, value:String)]()
     
