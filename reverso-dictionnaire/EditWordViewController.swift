@@ -137,13 +137,26 @@ class EditWordViewController: UITableViewController {
                         return value == word
                     }
                 }) {
+                    if !isNewWord {
+                        if self.selectedTranslation % 2 != 0{
+                            dataStructure[word] = translation
+                        } else {
+                            dataStructure[editingTranslation!] = nil
+                            dataStructure[translation] = word
+                        }
+                    } else {
+                        if self.selectedTranslation % 2 != 0{
+                            dataStructure[word] = translation
+                        } else {
+                            dataStructure[translation] = word
+                        }
+                    }
+                } else {
                     if self.selectedTranslation % 2 != 0{
                         dataStructure[word] = translation
                     } else {
                         dataStructure[translation] = word
                     }
-                } else {
-                    dataStructure[word] = translation
                 }
                 userDefaults.set(dataStructure, forKey: "list\(listNumber)")
             } else {
