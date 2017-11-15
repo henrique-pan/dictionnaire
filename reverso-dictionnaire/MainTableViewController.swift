@@ -300,19 +300,22 @@ extension MainTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let removedTuple: (key:String, value:String)
             if isSearching {
                 let removedWord = filteredWords[indexPath.item]
                 filteredWords.remove(at: indexPath.item)
                 let index = words.index(where: {t in
                     return t.key == removedWord.key && t.value == removedWord.value
                 })
-                words.remove(at: index!)
+                removedTuple = words.remove(at: index!)
             } else {
-                words.remove(at: indexPath.item)
+                removedTuple = words.remove(at: indexPath.item)
             }
             
             let listNumber = findListNumber()
-            userDefaults.set(words, forKey: "list\(listNumber)")
+            var dataStructure = userDefaults.object(forKey:"list\(listNumber)") as? [String: String]
+            dataStructure![removedTuple.key] = nil
+            userDefaults.set(dataStructure, forKey: "list\(listNumber)")
             
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
