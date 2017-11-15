@@ -1,0 +1,18 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Translation"; ObjectID = "3Yx-55-F0r"; */
+"3Yx-55-F0r.headerTitle" = "Traduction";
+
+/* Class = "UINavigationItem"; title = "Edit Word"; ObjectID = "Gxw-Ia-6WE"; */
+"Gxw-Ia-6WE.title" = "Modifier";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QeQ-2e-e4x"; */
+"QeQ-2e-e4x.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "WQU-pt-BJx"; */
+"WQU-pt-BJx.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Dictionnary"; ObjectID = "bFh-Bs-txM"; */
+"bFh-Bs-txM.title" = "Dictionnaire";
+
+/* Class = "UITableViewSection"; headerTitle = "Word"; ObjectID = "reW-WH-gIU"; */
+"reW-WH-gIU.headerTitle" = "Mot";
