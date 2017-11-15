@@ -1,11 +1,10 @@
 //
-//  EditWordViewController.swift
+//  TranslationTableViewCell.swift
 //  reverso-dictionnaire
 //
-//  Created by eleves on 2017-11-08.
+//  Created by Henrique Nascimento on 2017-11-13.
 //  Copyright © 2017 com.henrique. All rights reserved.
 //
-
 import UIKit
 
 class EditWordViewController: UITableViewController {
@@ -32,9 +31,12 @@ class EditWordViewController: UITableViewController {
     var imageArrowRight = UIImage(named: "arrow-right")
     var imageArrowDown = UIImage(named: "arrow-down")
     
-    private let languages = [(1, "French  ->  English"), (2, "English  ->  French"),
-                     (3, "French  ->  Portuguese"), (4, "Portuguese  ->  French"),
-                     (5, "English  ->  Portuguese"), (6, "Portuguese  ->  English")]
+    private let languages = [(1, NSLocalizedString("French  ->  English", comment: "")),
+                             (2, NSLocalizedString("English  ->  French", comment: "")),
+                             (3, NSLocalizedString("French  ->  Portuguese", comment: "")),
+                             (4, NSLocalizedString("Portuguese  ->  French", comment: "")),
+                             (5, NSLocalizedString("English  ->  Portuguese", comment: "")),
+                             (6, NSLocalizedString("Portuguese  ->  English", comment: ""))]
     
     var isNewWord = false
     
@@ -55,9 +57,9 @@ class EditWordViewController: UITableViewController {
         
         //Set title
         if isNewWord {
-            self.title = "Add Word"
+            self.title = NSLocalizedString("Add Word", comment: "")
         } else {
-            self.title = "Edit Word"
+            self.title = NSLocalizedString("Edit Word", comment: "")
             tableView.allowsSelection = false
             imageArrow.isHidden = true
             textFieldWord.isEnabled = false
@@ -104,7 +106,7 @@ class EditWordViewController: UITableViewController {
         isExpanded = false
         textFieldWord.becomeFirstResponder()
     }
-
+    
     
     @IBAction func textFieldTouchDown(_ sender: UITextField) {
         if isExpanded {
@@ -156,10 +158,10 @@ class EditWordViewController: UITableViewController {
             dismiss(animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title: "Attention",
-                                        message: "Please, enter the word and the translation correctelly",
-                                        preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: NSLocalizedString("Attention", comment: ""),
+                                          message: NSLocalizedString("Please, enter the word and the translation correctly", comment: ""),
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -198,7 +200,7 @@ class EditWordViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
     }
-
+    
 }
 
 extension EditWordViewController {
@@ -253,6 +255,3 @@ extension EditWordViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
 }
-
-
-
