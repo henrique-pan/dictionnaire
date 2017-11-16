@@ -5,12 +5,12 @@
   Created by Henrique Nascimento on 2017-11-15.
   Copyright © 2017 com.henrique. All rights reserved.
 */
-"French  ->  English" = "French  ->  English";
-"English  ->  French" = "English  ->  French";
-"French  ->  Portuguese" = "French  ->  Portuguese";
-"Portuguese  ->  French" = "Portuguese  ->  French";
-"English  ->  Portuguese" = "English  ->  Portuguese";
-"Portuguese  ->  English" = "Portuguese  ->  English";
+"French  ->  English" = "French  to  English";
+"English  ->  French" = "English  to  French";
+"French  ->  Portuguese" = "French  to  Portuguese";
+"Portuguese  ->  French" = "Portuguese  to  French";
+"English  ->  Portuguese" = "English  to  Portuguese";
+"Portuguese  ->  English" = "Portuguese  to  English";
 "Add Word" = "Add Word";
 "Edit Word" = "Edit Word";
 "Attention" = "Attention";
