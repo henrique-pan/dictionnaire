@@ -2,34 +2,36 @@
 //  MainTableViewController.swift
 //  reverso-dictionnaire
 //
-//  Created by eleves on 2017-11-08.
+//  Created by Henrique Nascimento on 2017-11-08.
 //  Copyright © 2017 com.henrique. All rights reserved.
 //
 
 import UIKit
 
+// Main ViewController of the application
 class MainTableViewController: UITableViewController {
     
-    
+    //MARK: Outlets
     @IBOutlet weak var imageArrow: UIImageView!
     @IBOutlet weak var laguageView: UIView!
     @IBOutlet weak var labelLanguage: UILabel!
     @IBOutlet weak var pickerLanguage: UIPickerView!
     @IBOutlet weak var buttonExpansion: UIButton!
+    //MARK: Outlets
     
     //UserDefaults
     let userDefaults = UserDefaults.standard
     
-    //Selected language
+    //MARK: Search bar
+    var searchBar: UISearchBar!
+    var searchController: UISearchController!
+    private var isSearching = false
+    private var filteredWords = [(key:String, value:String)]()
+    //MARK: Search bar
+    
+    //MARK: Language Selection
     var selectedTranslation: Int!
-    
-    // Language Expansion
     var isExpanded = false
-    
-    // Arrow's images
-    var imageArrowRight = UIImage(named: "arrow-right")
-    var imageArrowDown = UIImage(named: "arrow-down")
-    
     private let languages = [(1, NSLocalizedString("French  ->  English", comment: "")),
                              (2, NSLocalizedString("English  ->  French", comment: "")),
                              (3, NSLocalizedString("French  ->  Portuguese", comment: "")),
@@ -37,30 +39,39 @@ class MainTableViewController: UITableViewController {
                              (5, NSLocalizedString("English  ->  Portuguese", comment: "")),
                              (6, NSLocalizedString("Portuguese  ->  English", comment: ""))]
     
+    // Tuples to display without filter
     private var words = [(key:String, value:String)]()
+    //MARK: Language Selection
     
-    //Search bar
-    private var filteredWords = [(key:String, value:String)]()
-    private var isSearching = false
-    //Search bar
+    //MARK: TableView's properties
+    // Arrow's images
+    var imageArrowRight = UIImage(named: "arrow-right")
+    var imageArrowDown = UIImage(named: "arrow-down")
+    var selectedRow: Int?
+    //MARK: TableView's properties
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Large titles and search bar
-        setUpNavBar()
+        setUpNavigationBar()
         
-        //removes empty cells
+        // Removes empty cells
         self.tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //load SelectedTranslation
-        setTranslationLanguage()
+        setUpTranslationSelector()
         loadWords()
         tableView.reloadData()
     }
-    
+    /*
+     Load dataStructure from user defaults:
+        if dataStructure % 2
+            use key + value
+        else
+            use value + key
+    */
     func loadWords() {
         let listNumber = findListNumber()
         if let dataStructure = userDefaults.object(forKey:"list\(listNumber)") as? [String: String] {
@@ -78,6 +89,7 @@ class MainTableViewController: UITableViewController {
         }
     }
     
+    // Get the number of the selected list
     private func findListNumber() -> Int {
         if selectedTranslation <= 2 {
             return 2
@@ -88,60 +100,22 @@ class MainTableViewController: UITableViewController {
         }
     }
     
-    var searchController: UISearchController!
-    var searchBar: UISearchBar!
-    func setUpNavBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.dimsBackgroundDuringPresentation = false
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchBar = searchController.searchBar
-        
-
-        //searchBar.tintColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
-        //searchBar.backgroundColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
-        
-        searchBar.tintColor = UIColor.white
-        searchBar.barTintColor = UIColor.white
-        
-        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
-            textfield.textColor = UIColor.blue
-            textfield.tintColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
-            if let backgroundview = textfield.subviews.first {
-                
-                // Background color
-                backgroundview.backgroundColor = UIColor.white
-                
-                // Rounded corner
-                backgroundview.layer.cornerRadius = 10;
-                backgroundview.clipsToBounds = true;
-            }
-        }
-        
-        searchBar.delegate = self
+    func colapseExpansion() {
+        imageArrow.image = imageArrowRight
+        // Expand animation
+        let viewWidth = view.frame.width
+        let viewHeight = CGFloat(55)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.laguageView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
+            self.tableView.reloadData()
+        }, completion: { (finished: Bool) in
+            self.pickerLanguage.isHidden = true
+        })
+        // Expand animation
+        isExpanded = false
     }
     
-    func setTranslationLanguage() {
-        buttonExpansion.setBackgroundColor(color: UIColor.lightGray, forState: UIControlState.highlighted)
-        buttonExpansion.setBackgroundColor(color: UIColor.lightGray, forState: UIControlState.application)
-        
-        laguageView.frame.size.height = CGFloat(55)
-        
-        laguageView.setBottomBorder()        
-        
-        if let savedTranslation = userDefaults.object(forKey:"selectedTranslation") as? Int {
-            self.selectedTranslation = savedTranslation
-        } else {
-            selectedTranslation = 1;
-        }
-        pickerLanguage.isHidden = true
-        pickerLanguage.selectRow((selectedTranslation - 1), inComponent: 0, animated: true)
-        labelLanguage.text = languages[(selectedTranslation - 1)].1
-    }
-    
+    // MARK: Actions
     @IBAction func manageExpansion(_ sender: UIButton) {
         if isExpanded {
             colapseExpansion()
@@ -162,24 +136,12 @@ class MainTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func colapseExpansion() {
-        imageArrow.image = imageArrowRight
-        // Expand animation
-        let viewWidth = view.frame.width
-        let viewHeight = CGFloat(55)
-        UIView.animate(withDuration: 0.3, animations: {
-            self.laguageView.frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
-            self.tableView.reloadData()
-        }, completion: { (finished: Bool) in
-            self.pickerLanguage.isHidden = true
-        })
-        // Expand animation
-        isExpanded = false
-    }
+    // MARK: Actions
     
     
-    var selectedRow: Int?
+    
+    
+    // MARK: Prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
                 
@@ -205,35 +167,64 @@ class MainTableViewController: UITableViewController {
         }
         colapseExpansion()
     }
+    // MARK: Prepare for segue
     
 }
 
-extension UIView {
-    func setBottomBorder() {
-        self.layer.backgroundColor = UIColor.white.cgColor
+//MARK: MainTableViewController's Style
+extension MainTableViewController {
+    // Configs navigation bar
+    func setUpNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
         
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.gray.cgColor
-        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.8)
-        self.layer.shadowOpacity = 0.6
-        self.layer.shadowRadius = 0.0
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchBar = searchController.searchBar
+        
+        // Customized Search Bar
+        searchBar.tintColor = UIColor.white
+        searchBar.barTintColor = UIColor.white
+        
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.textColor = UIColor.blue
+            textfield.tintColor = UIColor(red: 44/255, green: 128/255, blue: 180/255, alpha: 1.0)
+            if let backgroundview = textfield.subviews.first {
+                backgroundview.backgroundColor = UIColor.white
+                backgroundview.layer.cornerRadius = 10;
+                backgroundview.clipsToBounds = true;
+            }
+        }
+        // Customized Search Bar
+        
+        searchBar.delegate = self
+    }
+    
+    // Configs language selector
+    func setUpTranslationSelector() {
+        buttonExpansion.setBackgroundColor(color: UIColor.lightGray, forState: UIControlState.highlighted)
+        buttonExpansion.setBackgroundColor(color: UIColor.lightGray, forState: UIControlState.application)
+        
+        laguageView.frame.size.height = CGFloat(55)
+        
+        laguageView.setBottomBorder()
+        
+        if let savedTranslation = userDefaults.object(forKey:"selectedTranslation") as? Int {
+            self.selectedTranslation = savedTranslation
+        } else {
+            selectedTranslation = 1;
+        }
+        pickerLanguage.isHidden = true
+        pickerLanguage.selectRow((selectedTranslation - 1), inComponent: 0, animated: true)
+        labelLanguage.text = languages[(selectedTranslation - 1)].1
     }
 }
 
-extension UIButton {
-    func setBackgroundColor(color: UIColor, forState: UIControlState) {
-        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
-        UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)
-        UIGraphicsGetCurrentContext()!.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
-        
-        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        self.setBackgroundImage(colorImage, for: forState)
-    }
-}
 
-// Extension Picker
+
+//MARK: Extension Picker
 extension MainTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -258,7 +249,7 @@ extension MainTableViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     
 }
 
-// Extension TableViewController
+//MARK: Extension TableViewController
 extension MainTableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -327,7 +318,7 @@ extension MainTableViewController {
     }
 }
 
-// Extension SearchBar
+//MARK: Extension SearchBar
 extension MainTableViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -351,17 +342,28 @@ extension MainTableViewController: UISearchBarDelegate {
 }
 
 
+//MARK: Custom default components
+extension UIView {
+    func setBottomBorder() {
+        self.layer.backgroundColor = UIColor.white.cgColor
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 0.8)
+        self.layer.shadowOpacity = 0.6
+        self.layer.shadowRadius = 0.0
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+extension UIButton {
+    func setBackgroundColor(color: UIColor, forState: UIControlState) {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        UIGraphicsGetCurrentContext()!.setFillColor(color.cgColor)
+        UIGraphicsGetCurrentContext()!.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        
+        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        self.setBackgroundImage(colorImage, for: forState)
+    }
+}
